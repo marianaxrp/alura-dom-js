@@ -1,4 +1,5 @@
-const criarTarefa = (event) => {
+(() => {
+    const criarTarefa = (event) => {
     event.preventDefault();
 
     const lista = document.querySelector('[data-list]');
@@ -12,6 +13,7 @@ const criarTarefa = (event) => {
     tarefa.innerHTML = conteudo;
     
     tarefa.appendChild(BotaoConcluir());
+    tarefa.appendChild(BotaoDeletar());
     lista.appendChild(tarefa);
     input.value = "";
 }
@@ -38,3 +40,24 @@ const concluirTarefa = (event) => {
 
     tarefaCompleta.classList.toggle('done');
 };
+
+const BotaoDeletar = () => {
+    const botaoDeletar = document.createElement('button');
+
+    botaoDeletar.innerText = 'deletar';
+    botaoDeletar.addEventListener('click', deletarTarefa);
+
+    return botaoDeletar;
+}
+
+const deletarTarefa = (event) => {
+    const botaoDeletar = event.target;
+    
+    const tarefaCompleta = botaoDeletar.parentElement;
+
+    tarefaCompleta.remove();
+
+    return botaoDeletar;
+}
+
+})();
